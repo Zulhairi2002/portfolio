@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serena - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6C63FF;
+            --secondary-color: #4CAF50;
+            --text-color: #333;
+            --bg-color: #f9f9f9;
+            --card-bg: #ffffff;
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        .dark-mode {
+            --primary-color: #8B85FF;
+            --secondary-color: #81C784;
+            --text-color: #f0f0f0;
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --header-bg: rgba(30, 30, 30, 0.95);
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--bg-color);
+            transition: var(--transition);
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background-color: var(--header-bg);
+            backdrop-filter: blur(5px);
+            box-shadow: var(--shadow);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .profile-pic {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-color);
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+            color: var(--primary-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            font-weight: 500;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .memoji-container {
+            font-size: 6rem;
+            margin-bottom: 1.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border: 2px solid var(--primary-color);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: var(--transition);
+            border-radius: 50px;
+            background: transparent;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+            color: var(--primary-color);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        /* Work Section */
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .work-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            background-color: var(--card-bg);
+            transition: var(--transition);
+        }
+
+        .work-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .work-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .work-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 1.5rem;
+            transform: translateY(100%);
+            transition: var(--transition);
+        }
+
+        .work-item:hover .work-overlay {
+            transform: translateY(0);
+        }
+
+        .work-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            color: var(--text-color);
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            max-width: 600px;
+        }
+
+        .contact-text {
+            margin-bottom: 2rem;
+            color: var(--text-color);
+            opacity: 0.9;
+        }
+
+        .contact-email {
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid transparent;
+        }
+
+        .contact-email:hover {
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 5%;
+            color: var(--text-color);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Admin Panel */
+        .admin-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--card-bg);
+            z-index: 2000;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .admin-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        .admin-form {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            font-family: inherit;
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .admin-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            margin-right: 1rem;
+        }
+
+        .admin-btn:hover {
+            background: var(--secondary-color);
+        }
+
+        .btn-danger {
+            background: #ff4757;
+        }
+
+        .btn-danger:hover {
+            background: #ff6b81;
+        }
+
+        .platforms-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .platform-item {
+            background: var(--bg-color);
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem 5%;
+            }
+            
+            nav ul {
+                gap: 1.5rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .hero {
+                padding-top: 4rem;
+            }
+
+            .memoji-container {
+                font-size: 4rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+            
+            section {
+                padding: 4rem 5%;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .profile-pic {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=100&q=80" alt="Profile" class="profile-pic">
+            <div class="logo">Serena</div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#work">Work</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <button class="theme-toggle" id="themeToggle">
+            <i class="fas fa-moon"></i>
+        </button>
+    </header>
+
+    <section class="hero">
+        <div class="memoji-container">
+            <i class="fas fa-user-circle"></i> <!-- Replace with your memoji -->
+        </div>
+        <h1>Creating meaningful digital experiences through design.</h1>
+        <p>I'm a designer and developer focused on creating clean, functional, and user-centered designs.</p>
+        <div>
+            <a href="#work" class="btn">View Work</a>
+            <button class="btn" id="adminBtn" style="margin-left: 1rem;">Admin Panel</button>
+        </div>
+    </section>
+
+    <section id="work">
+        <h2 class="section-title">Selected Work</h2>
+        <div class="work-grid" id="projectsContainer">
+            <!-- Projects will be dynamically added here -->
+            <div class="work-item">
+                <div style="background: linear-gradient(135deg, #6C63FF, #4CAF50); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white;">Project Image</div>
+                <div class="work-overlay">
+                    <h3>Project Title 1</h3>
+                    <p>Branding, Web Design</p>
+                </div>
+            </div>
+            <div class="work-item">
+                <div style="background: linear-gradient(135deg, #FF6B6B, #FFD93D); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white;">Project Image</div>
+                <div class="work-overlay">
+                    <h3>Project Title 2</h3>
+                    <p>UI/UX, Development</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Hello, I'm Serena. I specialize in creating thoughtful digital experiences that balance beauty and functionality.</p>
+                <p>With over 5 years of experience in design and development, I've worked with clients across various industries to create solutions that meet their unique needs and goals.</p>
+                <p>When I'm not designing, you can find me hiking, reading, or experimenting with new recipes in the kitchen.</p>
+            </div>
+            <div class="about-image">Your Photo</div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-content">
+            <p class="contact-text">Interested in working together or have a project in mind? Feel free to reach out and I'll get back to you as soon as possible.</p>
+            <a href="mailto:hello@serenaaa.website" class="contact-email">hello@serenaaa.website</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-links" id="socialLinks">
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+        <p>© 2023 Serena. All rights reserved.</p>
+    </footer>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <button class="admin-close" id="adminClose">
+            <i class="fas fa-times"></i>
+        </button>
+        <h2 style="text-align: center; margin-bottom: 2rem;">Portfolio Admin Panel</h2>
+        
+        <div class="admin-form">
+            <h3>Profile Settings</h3>
+            <div class="form-group">
+                <label for="profileName">Your Name</label>
+                <input type="text" id="profileName" class="form-control" placeholder="Enter your name" value="Serena">
+            </div>
+            <div class="form-group">
+                <label for="profileTitle">Professional Title</label>
+                <input type="text" id="profileTitle" class="form-control" placeholder="E.g. UI/UX Designer" value="Designer & Developer">
+            </div>
+            <div class="form-group">
+                <label for="profileImage">Profile Image URL</label>
+                <input type="text" id="profileImage" class="form-control" placeholder="Paste image URL" value="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=100&q=80">
+            </div>
+            <div class="form-group">
+                <label for="profileAbout">About Me</label>
+                <textarea id="profileAbout" class="form-control" placeholder="Write about yourself">Hello, I'm Serena. I specialize in creating thoughtful digital experiences that balance beauty and functionality.
+
+With over 5 years of experience in design and development, I've worked with clients across various industries to create solutions that meet their unique needs and goals.
+
+When I'm not designing, you can find me hiking, reading, or experimenting with new recipes in the kitchen.</textarea>
+            </div>
+            
+            <h3 style="margin-top: 2rem;">Social Links</h3>
+            <div id="socialPlatforms">
+                <div class="form-group">
+                    <label for="socialLinkedin">LinkedIn URL</label>
+                    <input type="text" id="socialLinkedin" class="form-control" placeholder="https://linkedin.com/in/yourname">
+                </div>
+                <div class="form-group">
+                    <label for="socialInstagram">Instagram URL</label>
+                    <input type="text" id="socialInstagram" class="form-control" placeholder="https://instagram.com/yourname">
+                </div>
+                <div class="form-group">
+                    <label for="socialGithub">GitHub URL</label>
+                    <input type="text" id="socialGithub" class="form-control" placeholder="https://github.com/yourname">
+                </div>
+                <div class="form-group">
+                    <label for="socialTwitter">Twitter URL</label>
+                    <input type="text" id="socialTwitter" class="form-control" placeholder="https://twitter.com/yourname">
+                </div>
+            </div>
+            
+            <button class="admin-btn" id="addPlatformBtn">Add Another Platform</button>
+            
+            <h3 style="margin-top: 2rem;">Projects</h3>
+            <div id="projectsList">
+                <div class="form-group">
+                    <label for="projectTitle1">Project 1 Title</label>
+                    <input type="text" id="projectTitle1" class="form-control" placeholder="Project name" value="Project Title 1">
+                </div>
+                <div class="form-group">
+                    <label for="projectDesc1">Project 1 Description</label>
+                    <textarea id="projectDesc1" class="form-control" placeholder="Project description">Branding, Web Design</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="projectImage1">Project 1 Image URL</label>
+                    <input type="text" id="projectImage1" class="form-control" placeholder="Paste image URL">
+                </div>
+            </div>
+            
+            <button class="admin-btn" id="addProjectBtn">Add New Project</button>
+            <button class="admin-btn btn-danger" id="resetBtn">Reset to Default</button>
+            <button class="admin-btn" id="saveBtn">Save Changes</button>
+        </div>
+    </div>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Check for saved theme preference
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+
+        // Admin panel functionality
+        const adminBtn = document.getElementById('adminBtn');
+        const adminPanel = document.getElementById('adminPanel');
+        const adminClose = document.getElementById('adminClose');
+        
+        adminBtn.addEventListener('click', () => {
+            adminPanel.style.display = 'block';
+        });
+        
+        adminClose.addEventListener('click', () => {
+            adminPanel.style.display = 'none';
+        });
+
+        // Add platform functionality
+        const addPlatformBtn = document.getElementById('addPlatformBtn');
+        const socialPlatforms = document.getElementById('socialPlatforms');
+        let platformCount = 4; // Starting after the initial 4 platforms
+        
+        addPlatformBtn.addEventListener('click', () => {
+            platformCount++;
+            const newPlatform = document.createElement('div');
+            newPlatform.className = 'form-group';
+            newPlatform.innerHTML = `
+                <label for="socialPlatform${platformCount}">Platform ${platformCount} URL</label>
+                <div style="display: flex; gap: 0.5rem;">
+                    <input type="text" id="socialPlatform${platformCount}Name" class="form-control" placeholder="Platform name" style="flex: 1;">
+                    <input type="text" id="socialPlatform${platformCount}" class="form-control" placeholder="https://platform.com/yourname" style="flex: 2;">
+                </div>
+            `;
+            socialPlatforms.appendChild(newPlatform);
+        });
+
+        // Add project functionality
+        const addProjectBtn = document.getElementById('addProjectBtn');
+        const projectsList = document.getElementById('projectsList');
+        let projectCount = 1; // Starting after the initial project
+        
+        addProjectBtn.addEventListener('click', () => {
+            projectCount++;
+            const newProject = document.createElement('div');
+            newProject.innerHTML = `
+                <div class="form-group">
+                    <label for="projectTitle${projectCount}">Project ${projectCount} Title</label>
+                    <input type="text" id="projectTitle${projectCount}" class="form-control" placeholder="Project name">
+                </div>
+                <div class="form-group">
+                    <label for="projectDesc${projectCount}">Project ${projectCount} Description</label>
+                    <textarea id="projectDesc${projectCount}" class="form-control" placeholder="Project description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="projectImage${projectCount}">Project ${projectCount} Image URL</label>
+                    <input type="text" id="projectImage${projectCount}" class="form-control" placeholder="Paste image URL">
+                </div>
+            `;
+            projectsList.appendChild(newProject);
+        });
+
+        // Save functionality
+        const saveBtn = document.getElementById('saveBtn');
+        
+        saveBtn.addEventListener('click', () => {
+            // Update profile info
+            document.querySelector('.logo').textContent = document.getElementById('profileName').value;
+            document.querySelector('.profile-pic').src = document.getElementById('profileImage').value;
+            document.querySelector('.about-text p').textContent = document.getElementById('profileAbout').value;
+            
+            // Update social links (simplified for demo)
+            alert('Changes saved successfully! In a real application, this would save to a database.');
+            
+            // Close admin panel
+            adminPanel.style.display = 'none';
+        });
+
+        // Reset functionality
+        const resetBtn = document.getElementById('resetBtn');
+        
+        resetBtn.addEventListener('click', () => {
+            if (confirm('Are you sure you want to reset all changes?')) {
+                document.getElementById('profileName').value = 'Serena';
+                document.getElementById('profileTitle').value = 'Designer & Developer';
+                document.getElementById('profileImage').value = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=100&q=80';
+                document.getElementById('profileAbout').value = `Hello, I'm Serena. I specialize in creating thoughtful digital experiences that balance beauty and functionality.
+
+With over 5 years of experience in design and development, I've worked with clients across various industries to create solutions that meet their unique needs and goals.
+
+When I'm not designing, you can find me hiking, reading, or experimenting with new recipes in the kitchen.`;
+                
+                alert('Settings reset to default!');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Firebase configuration (for your reference)
+        // You would integrate this in a real application
+        const firebaseConfig = {
+            apiKey: "AIzaSyCwL7aXr9DbkAMT8Ls2aAgrB6qE7VQXzGA",
+            authDomain: "smartexpensesjahaks.firebaseapp.com",
+            databaseURL: "https://smartexpensesjahaks-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "smartexpensesjahaks",
+            storageBucket: "smartexpensesjahaks.firebasestorage.app",
+            messagingSenderId: "853988035780",
+            appId: "1:853988035780:web:4db869f57eb13ed14c4d91",
+            measurementId: "G-B601PTZZV6"
+        };
+    </script>
+</body>
+</html>
