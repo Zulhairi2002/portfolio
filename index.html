@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serena - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6C63FF;
+            --secondary-color: #4CAF50;
+            --text-color: #333;
+            --bg-color: #f9f9f9;
+            --card-bg: #ffffff;
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+.dark-mode {
+            --primary-color: #8B85FF;
+            --secondary-color: #81C784;
+            --text-color: #f0f0f0;
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --header-bg: rgba(30, 30, 30, 0.95);
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--bg-color);
+            transition: var(--transition);
+            overflow-x: hidden;
+        }
+
+a {
+            color: inherit;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+/* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background-color: var(--header-bg);
+            backdrop-filter: blur(5px);
+            box-shadow: var(--shadow);
+        }
+
+.logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+.profile-pic {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-color);
+            box-shadow: var(--shadow);
+        }
+
+.logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+            color: var(--primary-color);
+        }
+
+nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+nav a {
+            font-weight: 500;
+            position: relative;
+        }
+
+nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+nav a:hover::after {
+            width: 100%;
+        }
+
+.theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+/* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+.memoji-container {
+            margin-bottom: 1.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+.memoji-container img {
+            width: 360px;
+            height: 360px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+.memoji-container i {
+            font-size: 6rem;
+        }
+
+@keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+.hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+.hero p {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+
+.btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border: 2px solid var(--primary-color);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: var(--transition);
+            border-radius: 50px;
+            background: transparent;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+.btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+/* Sections */
+        section {
+            padding: 6rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+.section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+            color: var(--primary-color);
+        }
+
+.section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+/* Work Section */
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+.work-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            background-color: var(--card-bg);
+            transition: var(--transition);
+        }
+
+.work-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+.work-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+.work-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 1.5rem;
+            transform: translateY(100%);
+            transition: var(--transition);
+        }
+
+.work-item:hover .work-overlay {
+            transform: translateY(0);
+        }
+
+.work-item:hover img {
+            transform: scale(1.05);
+        }
+
+/* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+.about-text {
+            color: var(--text-color);
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+.about-image {
+            width: 100%;
+            height: 400px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+.about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+/* Contact Section */
+        .contact-content {
+            max-width: 600px;
+        }
+
+.contact-text {
+            margin-bottom: 2rem;
+            color: var(--text-color);
+            opacity: 0.9;
+        }
+
+.contact-email {
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid transparent;
+        }
+
+.contact-email:hover {
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+/* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 5%;
+            color: var(--text-color);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+.social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+.social-links a {
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+.social-links a:hover {
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+/* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem 5%;
+            }
+
+nav ul {
+                gap: 1.5rem;
+            }
+
+.about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+.hero {
+                padding-top: 4rem;
+            }
+
+.memoji-container img {
+                width: 360px;
+                height: 360px;
+            }
+
+.memoji-container i {
+                font-size: 4rem;
+            }
+        }
+
+@media (max-width: 480px) {
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+section {
+                padding: 4rem 5%;
+            }
+
+.logo {
+                font-size: 1.2rem;
+            }
+
+.profile-pic {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="https://i.postimg.cc/ZqG9YCdN/screenshot-4.png" alt="Profile" class="profile-pic">
+            <div class="logo">Serena</div>
+        </div>
+        <nav>
+            <ul id="navLinks">
+                <li><a href="#work">Work</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <button class="theme-toggle" id="themeToggle">
+            <i class="fas fa-moon"></i>
+        </button>
+    </header>
+
+<section class="hero">
+        <div class="memoji-container" id="memojiContainer">
+            <i class="fas fa-user-circle"></i>
+        </div>
+        <h1 id="heroHeading">Creating meaningful digital experiences through design.</h1>
+        <p id="heroDescription">I'm a designer and developer focused on creating clean, functional, and user-centered designs.</p>
+        <div>
+            <a href="#work" class="btn" id="heroButton">View Work</a>
+        </div>
+    </section>
+
+<section id="work">
+        <h2 class="section-title" id="workTitle">Selected Work</h2>
+        <div class="work-grid" id="projectsContainer">
+            <div class="work-item">
+                <div style="background: linear-gradient(135deg, #6C63FF, #4CAF50); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white;">Project Image</div>
+                <div class="work-overlay">
+                    <h3>Project Title 1</h3>
+                    <p>Branding, Web Design</p>
+                </div>
+            </div>
+            <div class="work-item">
+                <div style="background: linear-gradient(135deg, #FF6B6B, #FFD93D); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white;">Project Image</div>
+                <div class="work-overlay">
+                    <h3>Project Title 2</h3>
+                    <p>UI/UX, Development</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section id="about">
+        <h2 class="section-title" id="aboutTitle">About Me</h2>
+        <div class="about-content">
+            <div class="about-text" id="aboutText">
+                <p>Hello, I'm Serena. I specialize in creating thoughtful digital experiences that balance beauty and functionality.</p>
+                <p>With over 5 years of experience in design and development, I've worked with clients across various industries to create solutions that meet their unique needs and goals.</p>
+                <p>When I'm not designing, you can find me hiking, reading, or experimenting with new recipes in the kitchen.</p>
+            </div>
+            <div class="about-image" id="aboutImage"></div>
+        </div>
+    </section>
+
+<section id="contact">
+        <h2 class="section-title" id="contactTitle">Get In Touch</h2>
+        <div class="contact-content">
+            <p class="contact-text" id="contactText">Interested in working together or have a project in mind? Feel free to reach out and I'll get back to you as soon as possible.</p>
+            <a href="mailto:zzulhairi5@gmail.com" class="contact-email" id="contactEmail">hello@serenaaa.website</a>
+        </div>
+    </section>
+
+<footer>
+        <div class="social-links" id="socialLinks">
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+        <p id="footerCopyright">© 2025 Zulhairi Bin Zulkifli. All rights reserved.</p>
+    </footer>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Firebase configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyCwL7aXr9DbkAMT8Ls2aAgrB6qE7VQXzGA",
+                authDomain: "smartexpensesjahaks.firebaseapp.com",
+                databaseURL: "https://smartexpensesjahaks-default-rtdb.asia-southeast1.firebasedatabase.app",
+                projectId: "smartexpensesjahaks",
+                storageBucket: "smartexpensesjahaks.appspot.com",
+                messagingSenderId: "853988035780",
+                appId: "1:853988035780:web:4db869f57eb13ed14c4d91",
+                measurementId: "G-B601PTZZV6"
+            };
+
+// Initialize Firebase
+            let database;
+            try {
+                firebase.initializeApp(firebaseConfig);
+                database = firebase.database();
+            } catch (error) {
+                console.error('Firebase initialization failed:', error);
+                alert('Failed to connect to the database. Please try again later.');
+                return;
+            }
+
+// Theme toggle functionality
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = themeToggle.querySelector('i');
+
+themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                if (document.body.classList.contains('dark-mode')) {
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+
+// Check for saved theme preference
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-mode');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+
+// Load data from Firebase
+            function loadPortfolioData() {
+                // Load profile data
+                database.ref('profile').once('value').then(snapshot => {
+                    const profileData = snapshot.val() || {
+                        name: 'Zulhairi Bin Zulkifli',
+                        title: 'Graduate Mechanical Engineer, Designer & Developer',
+                        image: 'https://i.postimg.cc/ZqG9YCdN/screenshot-4.png',
+                        about: `I am passionate about Mechanical Engineering, especially in design, innovation, and creating solutions that improve daily life. I enjoy working on design processes, problem-solving, and turning ideas into practical applications. At the same time, I have a strong interest in technology, particularly in building websites and digital platforms. I like exploring how engineering principles and technology can be combined to create solutions that are not only functional but also user-friendly. Through my journey, I continue to sharpen my skills in both mechanical design and web development, as I believe having knowledge in multiple fields allows me to approach challenges from different perspectives and deliver more creative solutions.`
+                    };
+                    document.querySelector('.logo').textContent = profileData.name;
+                    document.querySelector('.profile-pic').src = profileData.image;
+                    document.querySelector('#heroDescription').textContent = `I'm a ${profileData.title.toLowerCase()} focused on creating clean, functional, and user-centered designs.`;
+                    document.querySelector('#aboutText').innerHTML = profileData.about.split('\n').map(p => `<p>${p}</p>`).join('');
+                }).catch(error => {
+                    console.error('Error loading profile data:', error);
+                    alert('Failed to load profile data. Using default values.');
+                });
+
+// Load social links
+                database.ref('socialLinks').once('value').then(snapshot => {
+                    const socialLinks = snapshot.val() || [
+                        { platform: 'linkedin', url: '#' },
+                        { platform: 'instagram', url: '#' },
+                        { platform: 'github', url: '#' },
+                        { platform: 'twitter', url: '#' }
+                    ];
+                    const socialLinksContainer = document.getElementById('socialLinks');
+                    socialLinksContainer.innerHTML = socialLinks.map(link => `<a href="${link.url}"><i class="fab fa-${link.platform}"></i></a>`).join('');
+                }).catch(error => {
+                    console.error('Error loading social links:', error);
+                    alert('Failed to load social links. Using default values.');
+                });
+
+// Load projects
+                database.ref('projects').once('value').then(snapshot => {
+                    const projects = snapshot.val() || [
+                        { title: 'Project Title 1', description: 'Branding, Web Design', image: '', link: '' },
+                        { title: 'Project Title 2', description: 'UI/UX, Development', image: '', link: '' }
+                    ];
+                    const projectsContainer = document.getElementById('projectsContainer');
+                    projectsContainer.innerHTML = projects.map(project => `
+                        <div class="work-item">
+                            <div style="background: linear-gradient(135deg, #${project.image ? '6C63FF' : 'FF6B6B'}, #${project.image ? '4CAF50' : 'FFD93D'}); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white;">
+                                ${project.image ? `<img src="${project.image}" alt="${project.title}">` : 'Project Image'}
+                            </div>
+                            <div class="work-overlay">
+                                ${project.link ? `<a href="${project.link}" target="_blank">` : ''}
+                                <h3>${project.title}</h3>
+                                <p>${project.description}</p>
+                                ${project.link ? '</a>' : ''}
+                            </div>
+                        </div>
+                    `).join('');
+                }).catch(error => {
+                    console.error('Error loading projects:', error);
+                    alert('Failed to load projects. Using default values.');
+                });
+
+// Load content (hero, section titles, navigation, contact, footer)
+                database.ref('content').once('value').then(snapshot => {
+                    const contentData = snapshot.val() || {
+                        hero: {
+                            heading: 'Creating meaningful digital experiences through design.',
+                            description: `I'm a designer and developer focused on creating clean, functional, and user-centered designs.`,
+                            buttonText: 'View Work',
+                            memoji: ''
+                        },
+                        sectionTitles: {
+                            work: 'Selected Work',
+                            about: 'About Me',
+                            contact: 'Get In Touch',
+                            aboutImage: ''
+                        },
+                        navigation: [
+                            { text: 'Work', href: '#work' },
+                            { text: 'About', href: '#about' },
+                            { text: 'Contact', href: '#contact' }
+                        ],
+                        contact: {
+                            text: 'Interested in working together or have a project in mind? Feel free to reach out and I’ll get back to you as soon as possible.',
+                            email: 'hello@serenaaa.website'
+                        },
+                        footer: {
+                            copyright: '© 2025 Zulhairi Bin Zulkifli. All rights reserved.'
+                        }
+                    };
+                    document.getElementById('heroHeading').textContent = contentData.hero.heading;
+                    document.getElementById('heroDescription').textContent = contentData.hero.description;
+                    document.getElementById('heroButton').textContent = contentData.hero.buttonText;
+                    document.getElementById('workTitle').textContent = contentData.sectionTitles.work;
+                    document.getElementById('aboutTitle').textContent = contentData.sectionTitles.about;
+                    const aboutImageContainer = document.getElementById('aboutImage');
+                    if (contentData.sectionTitles.aboutImage) {
+                        aboutImageContainer.innerHTML = `<img src="${contentData.sectionTitles.aboutImage}" alt="About Image">`;
+                    } else {
+                        aboutImageContainer.textContent = 'Your Photo Link';
+                        aboutImageContainer.style.background = 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))';
+                    }
+                    document.getElementById('contactTitle').textContent = contentData.sectionTitles.contact;
+                    document.getElementById('contactText').textContent = contentData.contact.text;
+                    document.getElementById('contactEmail').href = `mailto:${contentData.contact.email}`;
+                    document.getElementById('contactEmail').textContent = contentData.contact.email;
+                    document.getElementById('footerCopyright').textContent = contentData.footer.copyright;
+                    const navLinksContainer = document.getElementById('navLinks');
+                    const filteredNavLinks = contentData.navigation.filter(link => 
+                        link.href !== 'admin.html' && link.text.toLowerCase() !== 'admin'
+                    );
+                    navLinksContainer.innerHTML = filteredNavLinks.map(link => `<li><a href="${link.href}">${link.text}</a></li>`).join('');
+                    const memojiContainer = document.getElementById('memojiContainer');
+                    if (contentData.hero.memoji) {
+                        memojiContainer.innerHTML = `<img src="${contentData.hero.memoji}" alt="Memoji">`;
+                    } else {
+                        memojiContainer.innerHTML = `<i class="fas fa-user-circle"></i>`;
+                    }
+                }).catch(error => {
+                    console.error('Error loading content data:', error);
+                    alert('Failed to load content data. Using default values.');
+                });
+            }
+
+// Initialize portfolio data
+            loadPortfolioData();
+
+// Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#' || targetId.includes('.html')) return;
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
