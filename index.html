@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Serena - Portfolio</title>
+    <title>Zulhairi's Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -232,7 +232,6 @@ nav a:hover::after {
 .work-item {
             position: relative;
             overflow: hidden;
-            aspect-ratio: 4/3;
             border-radius: 12px;
             box-shadow: var(--shadow);
             background-color: var(--card-bg);
@@ -246,29 +245,133 @@ nav a:hover::after {
 
 .work-item img {
             width: 100%;
-            height: 100%;
+            height: 200px;
             object-fit: cover;
+            border-radius: 12px 12px 0 0;
             transition: var(--transition);
         }
 
-.work-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
+.work-item-content {
             padding: 1.5rem;
-            transform: translateY(100%);
+        }
+
+.work-item-content h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+.work-item-content p {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+/* Certifications Section */
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+.certification-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            background-color: var(--card-bg);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+.certification-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+.certification-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px 12px 0 0;
+        }
+
+.certification-content {
+            padding: 1.5rem;
+        }
+
+.certification-content h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+.certification-content p {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+/* Modal for Certifications */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+.modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+.modal-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+        }
+
+.modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+/* Skills Section */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+.skill-item {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
             transition: var(--transition);
         }
 
-.work-item:hover .work-overlay {
-            transform: translateY(0);
-        }
-
-.work-item:hover img {
-            transform: scale(1.05);
+.skill-item:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
         }
 
 /* About Section */
@@ -413,6 +516,8 @@ section {
         <nav>
             <ul id="navLinks">
                 <li><a href="#work">Work</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#skills">Skills</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -437,19 +542,37 @@ section {
         <h2 class="section-title" id="workTitle">Selected Work</h2>
         <div class="work-grid" id="projectsContainer">
             <div class="work-item">
-                <div style="background: linear-gradient(135deg, #6C63FF, #4CAF50); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white;">Project Image</div>
-                <div class="work-overlay">
+                <div style="background: linear-gradient(135deg, #6C63FF, #4CAF50); width: 100%; height: 200px; display: flex; align-items: center; justify-content: center; color: white;">
+                    Project Image
+                </div>
+                <div class="work-item-content">
                     <h3>Project Title 1</h3>
                     <p>Branding, Web Design</p>
                 </div>
             </div>
             <div class="work-item">
-                <div style="background: linear-gradient(135deg, #FF6B6B, #FFD93D); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white;">Project Image</div>
-                <div class="work-overlay">
+                <div style="background: linear-gradient(135deg, #FF6B6B, #FFD93D); width: 100%; height: 200px; display: flex; align-items: center; justify-content: center; color: white;">
+                    Project Image
+                </div>
+                <div class="work-item-content">
                     <h3>Project Title 2</h3>
                     <p>UI/UX, Development</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+<section id="certifications">
+        <h2 class="section-title" id="certificationsTitle">Certifications</h2>
+        <div class="certifications-grid" id="certificationsContainer">
+            <!-- Certifications will be populated here -->
+        </div>
+    </section>
+
+<section id="skills">
+        <h2 class="section-title" id="skillsTitle">Skills</h2>
+        <div class="skills-grid" id="skillsContainer">
+            <!-- Skills will be populated here -->
         </div>
     </section>
 
@@ -483,6 +606,13 @@ section {
         <p id="footerCopyright">© 2025 Zulhairi Bin Zulkifli. All rights reserved.</p>
     </footer>
 
+<div class="modal" id="certificationModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+            <img src="" alt="Certification Image" id="modalImage">
+        </div>
+    </div>
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
     <script>
@@ -499,7 +629,7 @@ section {
                 measurementId: "G-B601PTZZV6"
             };
 
-// Initialize Firebase
+            // Initialize Firebase
             let database;
             try {
                 firebase.initializeApp(firebaseConfig);
@@ -510,11 +640,11 @@ section {
                 return;
             }
 
-// Theme toggle functionality
+            // Theme toggle functionality
             const themeToggle = document.getElementById('themeToggle');
             const themeIcon = themeToggle.querySelector('i');
 
-themeToggle.addEventListener('click', () => {
+            themeToggle.addEventListener('click', () => {
                 document.body.classList.toggle('dark-mode');
                 if (document.body.classList.contains('dark-mode')) {
                     themeIcon.classList.remove('fa-moon');
@@ -527,14 +657,29 @@ themeToggle.addEventListener('click', () => {
                 }
             });
 
-// Check for saved theme preference
+            // Check for saved theme preference
             if (localStorage.getItem('theme') === 'dark') {
                 document.body.classList.add('dark-mode');
                 themeIcon.classList.remove('fa-moon');
                 themeIcon.classList.add('fa-sun');
             }
 
-// Load data from Firebase
+            // Modal functionality
+            const modal = document.getElementById('certificationModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalClose = document.getElementById('modalClose');
+
+            modalClose.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+
+            window.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            // Load data from Firebase
             function loadPortfolioData() {
                 // Load profile data
                 database.ref('profile').once('value').then(snapshot => {
@@ -553,7 +698,7 @@ themeToggle.addEventListener('click', () => {
                     alert('Failed to load profile data. Using default values.');
                 });
 
-// Load social links
+                // Load social links
                 database.ref('socialLinks').once('value').then(snapshot => {
                     const socialLinks = snapshot.val() || [
                         { platform: 'linkedin', url: '#' },
@@ -568,7 +713,7 @@ themeToggle.addEventListener('click', () => {
                     alert('Failed to load social links. Using default values.');
                 });
 
-// Load projects
+                // Load projects
                 database.ref('projects').once('value').then(snapshot => {
                     const projects = snapshot.val() || [
                         { title: 'Project Title 1', description: 'Branding, Web Design', image: '', link: '' },
@@ -577,10 +722,10 @@ themeToggle.addEventListener('click', () => {
                     const projectsContainer = document.getElementById('projectsContainer');
                     projectsContainer.innerHTML = projects.map(project => `
                         <div class="work-item">
-                            <div style="background: linear-gradient(135deg, #${project.image ? '6C63FF' : 'FF6B6B'}, #${project.image ? '4CAF50' : 'FFD93D'}); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white;">
+                            <div style="background: linear-gradient(135deg, #${project.image ? '6C63FF' : 'FF6B6B'}, #${project.image ? '4CAF50' : 'FFD93D'}); width: 100%; height: 200px; display: flex; align-items: center; justify-content: center; color: white;">
                                 ${project.image ? `<img src="${project.image}" alt="${project.title}">` : 'Project Image'}
                             </div>
-                            <div class="work-overlay">
+                            <div class="work-item-content">
                                 ${project.link ? `<a href="${project.link}" target="_blank">` : ''}
                                 <h3>${project.title}</h3>
                                 <p>${project.description}</p>
@@ -593,7 +738,52 @@ themeToggle.addEventListener('click', () => {
                     alert('Failed to load projects. Using default values.');
                 });
 
-// Load content (hero, section titles, navigation, contact, footer)
+                // Load certifications
+                database.ref('certifications').once('value').then(snapshot => {
+                    const certifications = snapshot.val() || [
+                        { title: 'Certification 1', image: '', description: 'Description of Certification 1' }
+                    ];
+                    const certificationsContainer = document.getElementById('certificationsContainer');
+                    certificationsContainer.innerHTML = certifications.map(cert => `
+                        <div class="certification-item" data-image="${cert.image || ''}">
+                            <div style="background: linear-gradient(135deg, #6C63FF, #4CAF50); width: 100%; height: 200px; display: flex; align-items: center; justify-content: center; color: white;">
+                                ${cert.image ? `<img src="${cert.image}" alt="${cert.title}">` : 'Certification Image'}
+                            </div>
+                            <div class="certification-content">
+                                <h3>${cert.title}</h3>
+                                <p>${cert.description}</p>
+                            </div>
+                        </div>
+                    `).join('');
+
+                    // Add click event listeners for certifications
+                    document.querySelectorAll('.certification-item').forEach(item => {
+                        item.addEventListener('click', () => {
+                            const image = item.getAttribute('data-image');
+                            if (image) {
+                                modalImage.src = image;
+                                modal.style.display = 'flex';
+                            }
+                        });
+                    });
+                }).catch(error => {
+                    console.error('Error loading certifications:', error);
+                    alert('Failed to load certifications. Using default values.');
+                });
+
+                // Load skills
+                database.ref('skills').once('value').then(snapshot => {
+                    const skills = snapshot.val() || ['HTML', 'CSS', 'JavaScript'];
+                    const skillsContainer = document.getElementById('skillsContainer');
+                    skillsContainer.innerHTML = skills.map(skill => `
+                        <div class="skill-item">${skill}</div>
+                    `).join('');
+                }).catch(error => {
+                    console.error('Error loading skills:', error);
+                    alert('Failed to load skills. Using default values.');
+                });
+
+                // Load content
                 database.ref('content').once('value').then(snapshot => {
                     const contentData = snapshot.val() || {
                         hero: {
@@ -604,12 +794,16 @@ themeToggle.addEventListener('click', () => {
                         },
                         sectionTitles: {
                             work: 'Selected Work',
+                            certifications: 'Certifications',
+                            skills: 'Skills',
                             about: 'About Me',
                             contact: 'Get In Touch',
                             aboutImage: ''
                         },
                         navigation: [
                             { text: 'Work', href: '#work' },
+                            { text: 'Certifications', href: '#certifications' },
+                            { text: 'Skills', href: '#skills' },
                             { text: 'About', href: '#about' },
                             { text: 'Contact', href: '#contact' }
                         ],
@@ -625,6 +819,8 @@ themeToggle.addEventListener('click', () => {
                     document.getElementById('heroDescription').textContent = contentData.hero.description;
                     document.getElementById('heroButton').textContent = contentData.hero.buttonText;
                     document.getElementById('workTitle').textContent = contentData.sectionTitles.work;
+                    document.getElementById('certificationsTitle').textContent = contentData.sectionTitles.certifications;
+                    document.getElementById('skillsTitle').textContent = contentData.sectionTitles.skills;
                     document.getElementById('aboutTitle').textContent = contentData.sectionTitles.about;
                     const aboutImageContainer = document.getElementById('aboutImage');
                     if (contentData.sectionTitles.aboutImage) {
@@ -655,10 +851,10 @@ themeToggle.addEventListener('click', () => {
                 });
             }
 
-// Initialize portfolio data
+            // Initialize portfolio data
             loadPortfolioData();
 
-// Smooth scrolling for navigation links
+            // Smooth scrolling for navigation links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
